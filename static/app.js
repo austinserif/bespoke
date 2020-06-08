@@ -1,4 +1,7 @@
 $(async function() {
+
+    /** ---------------- EVENT LISTENERS ------------------- */
+
     $searchButton = $(".search-button");
     $searchField = $(".search-field");
     $searchForm = $(".search-form");
@@ -20,6 +23,42 @@ $(async function() {
         $searchField.val("");
     });
 
+    /** listen for click/tap on tagged keywords, get related articles from server, and post to DOM*/
+    $(".mdl-chip.mdl-chip--deletable.tag").on("click tap", async function(evt) {
+        let tag_id = this.id;
+        const response = await getArticles(tag_id);
+        await addNewTagResults(response.data.articles, response.data.tag_name);
+    });
+
+    /** event listener for adding tag from search history */
+    $(`.mdl-chip__contact.search`).on("click", async function(evt) {
+        let item_id = $(this).data("id");
+        console.log(item_id);
+        const response = await addTagOnServer(item_id);
+        if (response.data.result) {
+            await addNewTag(response.data.tag_id, response.data.tag_name);
+            await showTagBannerSuccess(response.data.tag_name);
+        } else {
+            showTagAlreadyExistsBanner();
+        }
+    });
+
+    /** listen for click on a tag's cancel button, remove from DOM 
+     * and tell server to update display property to False */
+    $("button.tag").on("click", async function(evt) {
+        let tag_id = $(this).data("id");
+        $(`#${tag_id}.tag`).remove();
+        await deleteTaggedItem(tag_id);
+    });
+
+    /** listen for click on a search item's cancel button, remove from DOM 
+     * and tell server to update display property to False */
+    $("button.search").on("click", async function(evt) {
+        let item_id = $(this).data("id");
+        $(`#${item_id}.search`).remove();
+        await deleteSearchedItem(item_id);
+    });
+
     /** pass in valid search term and return array of results, update db to 
      * reflect new search history on the server side */
     async function getSearchResults(term) {
@@ -28,6 +67,14 @@ $(async function() {
         const item_id = response.data.item_id;
         addSearchedItem(term, item_id);
     }
+
+
+
+
+    /** ---------------- SEARCH ITEMS ------------------- */
+
+
+
 
     /** add new item to search history on the DOM, add new event listeners to each*/
     function addSearchedItem(term, item_id) {
@@ -48,11 +95,7 @@ $(async function() {
 
         /** event listener for adding tag from search history */
         $(`.mdl-chip__contact.${item_id}-search`).on("click", async function(evt) {
-            const response = await axios({
-                method: 'post',
-                url: '/tag/add',
-                data: {item_id}
-            });
+            const response = await addTagOnServer(item_id);
             if (response.data.result) {
                 await addNewTag(response.data.tag_id, response.data.tag_name);
                 await showTagBannerSuccess(term);
@@ -62,13 +105,14 @@ $(async function() {
         });
     }
 
-    /** listen for click on tag's cancel button, remove*/
-    $(".mdl-chip.mdl-chip--deletable.tag").on("click tap", async function(evt) {
-        let tag_id = this.id;
-        const response = await getArticles(tag_id);
-        await addNewTagResults(response.data.articles, response.data.tag_name);
-    });
 
+
+    /** ---------------- HTTP REQUESTS ------------------- */
+
+
+
+
+    /** make request to server with tag_id, return server's response */
     async function getArticles(tag_id) {
         const response = await axios({
             method: 'get',
@@ -77,45 +121,20 @@ $(async function() {
         return response;
     }
 
-    /** event listener for adding tag from search history */
-    $(`.mdl-chip__contact.search`).on("click", async function(evt) {
-        let item_id = $(this).data("id");
-        console.log(item_id);
+    /** make post request to server with item_id of search history item (in order to register it as a tag), 
+     * return response from server  */
+    async function addTagOnServer(item_id) {
         const response = await axios({
             method: 'post',
             url: '/tag/add',
             data: {item_id}
         });
-        if (response.data.result) {
-            await addNewTag(response.data.tag_id, response.data.tag_name);
-            // await addNewTagResults(response.data.articles, response.data.tag_name);
-            await showTagBannerSuccess(response.data.tag_name);
-        } else {
-            showTagAlreadyExistsBanner();
-        }
-    });
-
-    $("button.tag").on("click", async function(evt) {
-        console.log("the selected tag should have been deleted")
-        
-        let tag_id = $(this).data("id");
-        console.log(evt.target);
-        console.log(tag_id);
-        $(`#${tag_id}.tag`).remove();
-        await deleteTaggedItem(tag_id);
-    });
-
-    $("button.search").on("click", async function(evt) {
-        console.log("the selected search item should have been deleted")
-        let item_id = $(this).data("id");
-        console.log(item_id);
-        $(`#${item_id}.search`).remove();
-        await deleteSearchedItem(item_id);
-    });
+        return response;
+    }
 
     /** tell the server to set display property of a given search_item to false */
     async function deleteSearchedItem(item_id) {
-        const response = await axios({
+        await axios({
             method: 'post',
             url: '/search/delete',
             data: {item_id}
@@ -124,12 +143,20 @@ $(async function() {
 
     /** tell server side to change display column to False on associated tag */
     async function deleteTaggedItem(tag_id) {
-        const response = await axios({
+        await axios({
             method: 'post',
             url: '/tag/delete',
             data: {tag_id}
         });
     }
+
+
+    
+
+    /** ---------------- DOM MANIPULATORS ------------------- */
+
+
+
 
     /** pass in a list of articles and append them to search results page on the DOM */
     async function showSearchResults(results) {
@@ -147,6 +174,7 @@ $(async function() {
         }
     }
 
+    /** add new tag to the DOM given a tag_id and name, attach event listeners to tag*/
     async function addNewTag(id, name) {
         $("#active-tags").prepend(`
         <span id="${id}" class="mdl-chip mdl-chip--deletable tag">
@@ -157,12 +185,13 @@ $(async function() {
         </span>
         `);
 
+        /** when tag cancel button is selected, remove from DOM and tell server to change display */
         $(`.mdl-chip__action.${id}-tag`).on("click", async function(evt) {
             $(`#${id}.tag`).remove();
             await deleteTaggedItem(id);
         });
 
-        /** when tag is selected, add something */
+        /** when tag body is selected, display articles related to tag's keyword */
         $(`#${id}.mdl-chip.mdl-chip--deletable`).on("click tap", async function(evt) {
             let tag_id = id;
             const response = await getArticles(tag_id);
@@ -170,6 +199,7 @@ $(async function() {
         });
     }
 
+    /** add articles to DOM associated with newly added tag item*/
     async function addNewTagResults(results, tag_name) {
         for (item of results) {
             $("#feed").prepend(
@@ -200,7 +230,6 @@ $(async function() {
       </div>`)
     }
     
-
     /** remove any current banners and add a new success banner to DOM for 
      * the added tag with instructions on how to view */
     async function showTagBannerSuccess(term) {
