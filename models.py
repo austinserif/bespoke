@@ -49,13 +49,6 @@ class User(db.Model):
         """Return False by definition."""
         return False
     
-    def new_project(self, title):
-        """start new project and commit to db, return obj"""
-        project = Project(title=title, user_id=self.id)
-        db.session.add(project)
-        db.session.commit()
-        return project
-    
     def searches(self):
         """return list of active search items for user"""
         return SearchItem.query.filter(SearchItem.user_id==self.id).\
@@ -73,7 +66,7 @@ class User(db.Model):
         db.session.add(user)
         db.session.commit()
         return user
-          
+
     @classmethod
     def sign_up(cls, user_obj):
         """take user_obj populated from form, hash and store password, commit to database"""
