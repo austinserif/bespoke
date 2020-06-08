@@ -65,12 +65,17 @@ $(async function() {
     /** listen for click on tag's cancel button, remove*/
     $(".mdl-chip.mdl-chip--deletable.tag").on("click tap", async function(evt) {
         let tag_id = this.id;
-        const response = await axios({
-            method: 'get',
-            url: `/tag/articles?tag_id=${tag_id}`
-        });
+        const response = await getArticles(tag_id);
         await addNewTagResults(response.data.articles, response.data.tag_name);
     });
+
+    async function getArticles(tag_id) {
+        const response = await axios({
+            method: 'get',
+            url: `tag/articles?tag_id=${tag_id}`
+        });
+        return response;
+    }
 
     /** event listener for adding tag from search history */
     $(`.mdl-chip__contact.search`).on("click", async function(evt) {
@@ -160,10 +165,7 @@ $(async function() {
         /** when tag is selected, add something */
         $(`#${id}.mdl-chip.mdl-chip--deletable`).on("click tap", async function(evt) {
             let tag_id = id;
-            const response = await axios({
-                method: 'get',
-                url: `/tag/articles?tag_id=${tag_id}`
-            });
+            const response = await getArticles(tag_id);
             await addNewTagResults(response.data.articles, response.data.tag_name);
         });
     }
