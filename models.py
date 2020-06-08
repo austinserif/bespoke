@@ -1,3 +1,5 @@
+"""DB/ORM models file"""
+
 from sqlalchemy import desc
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import EmailType
