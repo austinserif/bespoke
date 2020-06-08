@@ -1,0 +1,268 @@
+:root {
+  --main-bg-color: #011638;
+  --main-font-color: white;
+  --main-button-color: black;
+  --main-accent-color: #B497D6;
+  --dashboard-bg-color: lightgrey;
+  --main-font-family: 'Quasimoda', sans-serif;
+
+  --main-font-weight: 600;
+  --form-font-weight: 200;
+  --medium-font-weight: 400;
+  --h1-font-size: 75px;
+  --h2-font-size: 50px;
+  --menu-font-size: 20px;
+  --paragraph-font-size: 15px;
+  --logo-font-size: 30px;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+
+h1 {
+  font-family: 'Quasimoda' !important;
+  font-weight: 600 !important;
+  font-size: 100px !important;
+  color: white;
+}
+
+h2 {
+  font-family: var(--main-font-family) !important;
+  font-weight: var(--medium-font-weight) !important;
+  font-size: var(--h2-font-size) !important;
+  color: var(--main-font-color) !important;
+}
+
+h3 {
+  font-family: var(--main-font-family) !important;
+  font-weight: var(--form-font-weight) !important;
+  font-size: var(--menu-font-size) !important;
+  color: black !important;
+}
+
+#title-sequence {
+  align-content: center;
+}
+
+input {
+  height: 40px;
+  font-size: 25px;
+  font-weight: 200;
+  color: black;
+  width: 250px;
+}
+
+/*---------------------- overloaded mdl styles --------------------------*/
+.mdl-layout__header-row {
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+  /* height: 64px; */
+  vertical-align: -webkit-baseline-middle;
+}
+
+/* .mdl-layout__drawer-button, .mdl-layout__drawer work 
+around to make collapsed drawer on right hand side */
+.mdl-layout__drawer-button, .mdl-layout__drawer {
+    left: auto;
+    right: 0;
+}
+
+.mdl-icon {
+  color: var(--main-font-color);
+  font-family: var(--main-font-family);
+  font-size: var(--logo-font-size);
+  font-weight: var(--main-font-weight);
+  text-decoration-color: var(--main-font-color) !important;
+}
+
+/* set hamburger menu button to correct 
+background color, remove outline */
+.mdl-layout__header, .mdl-layout__drawer-button {
+  background-color: var(--main-bg-color);
+  outline-color: var(--main-bg-color);
+}
+
+.mdl-layout__drawer {    
+    transform:translateX(250px);
+}
+
+/* set padding-left to 0 on layout__header-row to make logo flush with left side in nav-bar*/
+.mdl-layout__header-row {
+  padding-left: 0px;
+}
+
+.mdl-navigation__link {
+  color: var(--main-font-color);
+  font-family: var(--main-font-family);
+  font-weight: var(--main-font-weight);
+  font-size: var(--menu-font-size);
+}
+
+.mdl-layout__content {
+  background-color: var(--main-bg-color);
+}
+
+.mdl-textfield {
+  color: var(--main-font-color);
+  font-family: var(--main-font-family) !important;
+  font-weight: var(--form-font-weight);
+  font-size: 20px;
+}
+
+/* float login button to the right */
+#login-button, #sign-up-button {
+  width: 250px;
+  margin-top: 5px;
+}
+
+.mdl-button {
+  background-color: black;
+  font-family: var(--main-font-family);
+  color: var(--main-font-color) !important;
+  font-weight: 600;
+  height: 40px;
+  margin: auto;
+}
+
+.mdl-button:hover {
+  background-color: var(--main-accent-color);
+}
+
+b {
+  color: var(--main-accent-color);
+}
+
+.form-group {
+  background-color: var(--main-bg-color);
+  width: fit-content;
+  padding-right: 0px;
+  margin: auto;
+}
+
+.input-group, .mdl-textfield, .mdl-js-textfield, .mdl-textfield--floating-label {
+  margin: 0px;
+  padding: 5px;
+}
+
+#user-sign-in-form {
+  padding-right: 0px;
+}
+
+#get-started-button {
+  transform: translate(241px, 15px) !important;
+}
+
+.mdl-tabs__tab {
+  color: black !important;
+  text-decoration: none;
+  opacity: .99 !important;
+  margin: 5px;
+}
+
+.mdl-tabs__tab-bar {
+  background-color: white;
+  border: none;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.mdl-tabs__tab.is-active {
+  background-color: rgb(63, 81, 181);
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+.mdl-card {
+  margin: auto;
+  width: fit-content;
+}
+
+.mdl-cell {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mdl-grid {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.mdl-chip {
+  margin: 5px;
+  font-family: var(--main-font-family);
+  font-weight: var(--main-font-weight);
+}
+
+#dash-searches-cell {
+  margin: auto;
+  padding: auto;
+}
+
+.card, .card-title{
+  margin: 10px;
+  font-family: var(--main-font-family);
+  font-weight: 600;
+}
+
+.card {
+  border-radius: 20px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-img-top {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+p {
+  line-height: 100%;
+  font-family: var(--main-font-family);
+  font-weight: 300;
+}
+
+.search-button {
+  margin: 0px;
+}
+
+.search-form {
+  width: fit-content;
+}
+
+#dash-content-cell {
+  margin: 0px;
+}
+
+#dash-search-results-cell {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mdl-chip__contact {
+  cursor: pointer;
+}
+
+.mdl-chip__contact:hover {
+  opacity: .7;
+}
+
+.mdl-chip:active {
+  opacity: 1 !important;
+  background-color: #dedede !important;
+}

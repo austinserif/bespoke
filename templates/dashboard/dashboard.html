@@ -1,0 +1,9 @@
+{% extends "base.html" %}  
+
+{% block layout %}      
+    <div class = "mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        {% include "dashboard/header-dash.html" %}
+        {% include "dashboard/sidebar-dash.html" %}
+        {% include "dashboard/main-dash.html" %}
+    </div>
+{% endblock %}

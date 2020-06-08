@@ -1,0 +1,20 @@
+<div class="row d-flex justify-content-center">
+    <form action="/get-started" method="POST" id="get-started-form">
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <div class="input-group mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            {% for error in field.errors %}
+                <span class="mdl-textfield__error">{{ error }}</span>
+            {% endfor %}
+            {{ field(placeholder="name@email.com", _class="mdl-textfield__input", type="email", style="transform: translateX(-30px);") }}
+            <div class="input-group-append">
+                <button id="get-started-button" class="mdl-button mdl-layout--large-screen-only">Get Started</button>
+            </div>
+            <div class="input-group-append">
+                <button id="get-started-button" class="mdl-button mdl-layout--small-screen-only">Go</button>
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+</div>

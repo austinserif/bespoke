@@ -1,0 +1,17 @@
+<div class="form-group mdl-cell--12-col">
+    <form action="/sign-up?u={{user.id}}" method="POST" id="sign-up-form">
+        <h2>sign-up</h2>
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.widget.input_type != 'hidden' %}
+        <div class="input-group mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+            {% for error in field.errors %}
+                <span class="mdl-textfield__error">{{ error }}</span>
+            {% endfor %}
+            {{ field(placeholder=field.label.text, _class="mdl-textfield__input") }}
+        </div>
+        {% endfor %}
+
+        <button id="sign-up-button" class="mdl-button">submit</button>
+    </form>
+</div>

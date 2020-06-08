@@ -1,0 +1,9 @@
+{% extends "base.html" %}  
+
+{% block layout %}      
+    <div class = "mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        {% include "home/header-home.html" %}
+        {% include "home/sidebar-home.html" %}
+        {% include "login/main-login.html" %}
+    </div>
+{% endblock %}

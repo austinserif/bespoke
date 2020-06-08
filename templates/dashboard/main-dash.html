@@ -1,0 +1,76 @@
+<main class = "mdl-layout__content" style="background-color: white;">
+    <div class="mdl-tabs mdl-js-tabs">
+        <aside class="mdl-tabs__tab-bar fixed" style="background-color: white;">
+            <a href="#dash-home" class="mdl-js-button mdl-button--fab mdl-tabs__tab is-active" style="outline: none !important; opacity: 1 !important; height: 56px; width: 56px;">
+                <span class="material-icons">home</span>
+            </a>
+            
+            <a href="#dash-search" class="mdl-js-button mdl-button--fab mdl-tabs__tab" style="outline: none !important; opacity: 1 !important; height: 56px; width: 56px;">
+                <span class="material-icons">search</span>
+            </a>
+
+            <a href="#dash-profile" class="mdl-js-button mdl-button--fab mdl-tabs__tab" style="outline: none !important; opacity: 1 !important; height: 56px; width: 56px;">
+                <span class="material-icons">perm_identity</span>
+            </a>
+        </aside>
+
+        <span class="divider"></span>
+
+        <section class="mdl-layout__tab-panel mdl-tabs__panel is-active" id="dash-home">
+            <div class = "mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Welcome to your feed!</strong> Select a tag to view articles, otherwise press <i class="material-icons">cancel</i> to remove it.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <div class="mdl-cell mdl-cell--12-col" id="active-tags">
+                    {% for tag in session["active_tags"] %}
+                    <span id="{{tag['tag_id']}}" class="mdl-chip mdl-chip--deletable tag">
+                        <span class="mdl-chip__text {{tag['tag_id']}}-tag tag">{{tag['name']}}</span>
+                        <button type="button" class="mdl-chip__action {{tag['tag_id']}}-tag tag" data-id="{{tag['tag_id']}}">
+                            <i class="material-icons {{tag['tag_id']}}-tag tag">cancel</i>
+                        </button>
+                    </span>
+                    {% endfor %}
+                </div>
+                <div id="dash-content-cell" class="mdl-cell mdl-cell--12-col">
+                    {% include "dashboard/components/feed.html" %}
+                </div>
+            </div>
+        </section>
+
+        <section class="mdl-tabs__panel" id="dash-search">
+            <div class = "mdl-grid">
+                <div id="search-banner" class="mdl-cell mdl-cell--12-col"></div>
+                <div id="dash-content-cell" class="mdl-cell mdl-cell--12-col">
+                    {% include "dashboard/components/search.html" %}
+                </div>
+                <div id="dash-searches-cell" class="mdl-cell mdl-cell--12-col">
+                    {% for search in session["search_history"] %}
+                    <span id="{{search['item_id']}}" class="mdl-chip mdl-chip--deletable search">
+                        <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white material-icons {{search['item_id']}}-search search" style="transform: translateX(-12px);" data-id="{{search['item_id']}}">add</span>
+                        <span class="mdl-chip__text {{search['item_id']}}-search search">{{search['term']}}</span>
+                        <button type="button" class="mdl-chip__action {{search['item_id']}}-search search" data-id="{{search['item_id']}}">
+                            <i class="material-icons {{search['item_id']}}-search search">cancel</i>
+                        </button>
+                    </span>
+                    {% endfor %}
+                </div>
+                <div id="dash-search-results-cell" class="mdl-grid">
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="mdl-tabs__panel" id="dash-profile">
+            <div class = "mdl-grid">
+                <div id="dash-content-cell" class="mdl-cell mdl-cell--12-col">
+                    {% include "dashboard/components/profile.html" %}
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>
