@@ -8,7 +8,7 @@ from models import User, Tag
 app.config.from_object('config.Testing')
 db.create_all()
 
-class UserModelTestCase(TestCase):
+class TagModelTestCase(TestCase):
     """Test views for messages."""
     
     def setUp(self):
