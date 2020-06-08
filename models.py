@@ -48,7 +48,7 @@ class User(db.Model):
     def is_annonymous(self):
         """Return False by definition."""
         return False
-    
+
     def searches(self):
         """return list of active search items for user"""
         return SearchItem.query.filter(SearchItem.user_id==self.id).\
@@ -94,7 +94,7 @@ class User(db.Model):
 
     @classmethod
     def add_tag(cls, tag_name, user_id):
-        """add new tag if doesn't exist, otherwise do nothing"""
+        """add new tag and return if doesn't exist yet, otherwise return False"""
         user = User.query.get(user_id)
         if len(Tag.query.filter(Tag.name==tag_name).filter(Tag.user_id==user_id).filter(Tag.display==True).all()) == 0:
             tag = Tag(name=tag_name, user_id=user_id)
