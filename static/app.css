@@ -27,6 +27,7 @@ h1 {
   font-weight: 600 !important;
   font-size: 100px !important;
   color: white;
+  text-rendering:optimizeLegibility;
 }
 
 h2 {
@@ -34,6 +35,7 @@ h2 {
   font-weight: var(--medium-font-weight) !important;
   font-size: var(--h2-font-size) !important;
   color: var(--main-font-color) !important;
+  text-rendering:optimizeLegibility;
 }
 
 h3 {
@@ -41,6 +43,7 @@ h3 {
   font-weight: var(--form-font-weight) !important;
   font-size: var(--menu-font-size) !important;
   color: black !important;
+  text-rendering:optimizeLegibility;
 }
 
 #title-sequence {
@@ -53,6 +56,7 @@ input {
   font-weight: 200;
   color: black;
   width: 250px;
+  text-rendering:optimizeLegibility;
 }
 
 /*---------------------- overloaded mdl styles --------------------------*/
@@ -76,6 +80,7 @@ around to make collapsed drawer on right hand side */
   font-size: var(--logo-font-size);
   font-weight: var(--main-font-weight);
   text-decoration-color: var(--main-font-color) !important;
+  text-rendering:optimizeLegibility;
 }
 
 /* set hamburger menu button to correct 
@@ -99,6 +104,7 @@ background color, remove outline */
   font-family: var(--main-font-family);
   font-weight: var(--main-font-weight);
   font-size: var(--menu-font-size);
+  text-rendering:optimizeLegibility;
 }
 
 .mdl-layout__content {
@@ -110,6 +116,7 @@ background color, remove outline */
   font-family: var(--main-font-family) !important;
   font-weight: var(--form-font-weight);
   font-size: 20px;
+  text-rendering:optimizeLegibility;
 }
 
 /* float login button to the right */
@@ -125,14 +132,17 @@ background color, remove outline */
   font-weight: 600;
   height: 40px;
   margin: auto;
+  text-rendering:optimizeLegibility;
 }
 
 .mdl-button:hover {
   background-color: var(--main-accent-color);
+  text-rendering:optimizeLegibility;
 }
 
 b {
   color: var(--main-accent-color);
+  text-rendering:optimizeLegibility;
 }
 
 .form-group {
@@ -206,6 +216,7 @@ b {
   margin: 5px;
   font-family: var(--main-font-family);
   font-weight: var(--main-font-weight);
+  text-rendering:optimizeLegibility;
 }
 
 #dash-searches-cell {
@@ -217,6 +228,7 @@ b {
   margin: 10px;
   font-family: var(--main-font-family);
   font-weight: 600;
+  text-rendering:optimizeLegibility;
 }
 
 .card {
@@ -235,6 +247,7 @@ p {
   line-height: 100%;
   font-family: var(--main-font-family);
   font-weight: 300;
+  text-rendering:optimizeLegibility;
 }
 
 .search-button {
