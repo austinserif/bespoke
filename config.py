@@ -31,7 +31,9 @@ class Production(Config):
     FLASK_ENV = 'production'
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URI')
+
+    #DATABASE_URL is default config variable name for heroku-created db
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 class Testing(Config):
     """configuration class for production testing"""
