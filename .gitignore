@@ -1,7 +1,6 @@
 /venv
 /tests/__pycache__
 /__pycache__
-config.py
 .env
 .DS_Store
 .vscode
