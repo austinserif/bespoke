@@ -51,9 +51,10 @@ h3 {
 }
 
 input {
+  font-family: quasimoda-2;
   height: 40px;
   font-size: 25px;
-  font-weight: 200;
+  font-weight: 400;
   color: black;
   width: 250px;
   text-rendering:optimizeLegibility;
@@ -113,8 +114,8 @@ background color, remove outline */
 
 .mdl-textfield {
   color: var(--main-font-color);
-  font-family: var(--main-font-family) !important;
-  font-weight: var(--form-font-weight);
+  font-family: quasimoda-2 !important;
+  font-weight: 400;
   font-size: 20px;
   text-rendering:optimizeLegibility;
 }
