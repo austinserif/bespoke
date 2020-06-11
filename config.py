@@ -33,7 +33,9 @@ class Production(Config):
     TESTING = False
 
     #DATABASE_URL is default config variable name for heroku-created db
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('PRODUCTION_DATABASE_URI')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class Testing(Config):
     """configuration class for production testing"""

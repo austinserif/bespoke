@@ -4,7 +4,7 @@
   --main-button-color: black;
   --main-accent-color: #B497D6;
   --dashboard-bg-color: lightgrey;
-  --main-font-family: 'Quasimoda', sans-serif;
+  --main-font-family: quasimoda, sans-serif;
 
   --main-font-weight: 600;
   --form-font-weight: 200;
@@ -23,7 +23,7 @@ html, body {
 }
 
 h1 {
-  font-family: 'Quasimoda' !important;
+  font-family: quasimoda !important;
   font-weight: 600 !important;
   font-size: 100px !important;
   color: white;
@@ -53,7 +53,8 @@ h3 {
 input {
   height: 40px;
   font-size: 25px;
-  font-weight: 200;
+  font-family: quasimoda-2;
+  font-weight: 400;
   color: black;
   width: 250px;
   text-rendering:optimizeLegibility;
@@ -78,7 +79,7 @@ around to make collapsed drawer on right hand side */
   color: var(--main-font-color);
   font-family: var(--main-font-family);
   font-size: var(--logo-font-size);
-  font-weight: var(--main-font-weight);
+  font-weight: 500;
   text-decoration-color: var(--main-font-color) !important;
   text-rendering:optimizeLegibility;
 }
@@ -113,8 +114,8 @@ background color, remove outline */
 
 .mdl-textfield {
   color: var(--main-font-color);
-  font-family: var(--main-font-family) !important;
-  font-weight: var(--form-font-weight);
+  font-family: quasimoda-2 !important;
+  font-weight: 400;
   font-size: 20px;
   text-rendering:optimizeLegibility;
 }
@@ -153,7 +154,7 @@ b {
 }
 
 .input-group, .mdl-textfield, .mdl-js-textfield, .mdl-textfield--floating-label {
-  margin: 0px;
+  margin: 5px;
   padding: 5px;
 }
 

@@ -168,12 +168,6 @@ def tag_articles():
     else:
         return jsonify(articles=all_articles['articles'], result=True, tag_name=tag_name)
 
-# @app.route("/docs")
-# def documentation():
-#     """render documentation page"""
-#     return render_template("docs.html")
 
-# @app.route("/about")
-# def about():
-#     """render about page"""
-#     return render_template("about.html")
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
