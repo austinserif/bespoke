@@ -1,14 +1,8 @@
 ## Bespoke Newsdesk
 ### Capstone Project by Austin Serif
 
-#### Project location(s):
-
-Heroku version hosted with gunicorn webserver: https://bespoke-newsroom.herokuapp.com/
-
-Manually configured nginx reverse-proxy and uWSGI webserver on digital ocean linux server: https://bespokenews.us
-
-#### APIs used: 
-https://newsapi.org/
+https://bespokenews.us
+[NewsAPI](https://newsapi.org/)
 
 Bespoke is built on-top of [Flask](https://flask.palletsprojects.com/en/1.1.x/), [PostgreSQL](https://www.postgresql.org/), and [SQLAlchemy](https://www.sqlalchemy.org/), with [Bcrypt](https://pypi.org/project/bcrypt/) encryption. For quick, out of the box responsivenss, design patterns from [Material Design Lite](https://getmdl.io/) and [Bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/) were utilized on the front-end.
 
