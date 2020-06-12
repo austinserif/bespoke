@@ -1,8 +1,12 @@
 ## Bespoke Newsdesk
 ### Capstone Project by Austin Serif
 
-#### Project location: 
-https://bespoke-newsroom.herokuapp.com/
+#### Project location(s):
+
+Heroku version hosted with gunicorn webserver: https://bespoke-newsroom.herokuapp.com/
+
+Manually configured nginx reverse-proxy and uWSGI webserver on digital ocean linux server: https://bespokenews.us
+
 #### APIs used: 
 https://newsapi.org/
 
