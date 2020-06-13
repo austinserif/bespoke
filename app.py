@@ -9,7 +9,7 @@ import json
 from news import newsapi, get_articles
 
 app = Flask(__name__)
-app.config.from_object('config.Development')
+app.config.from_object('config.Production')
 
 connect_db(app)
 db.create_all()
