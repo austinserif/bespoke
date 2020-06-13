@@ -4,11 +4,12 @@ from flask import Flask, render_template, redirect, request, flash, jsonify, ses
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from forms import UserSignUpForm, UserLoginForm, GetStartedForm, NewTagForm
 from models import connect_db, db, User, Tag, SearchItem
+from datetime import datetime, timedelta
 import json
 from news import newsapi
 
 app = Flask(__name__)
-app.config.from_object('config.Production')
+app.config.from_object('config.Development')
 
 connect_db(app)
 db.create_all()
@@ -107,7 +108,9 @@ def search():
     search_item = User.add_search(term, current_user.id)
     update_session()
     try:
-        all_articles = newsapi.get_everything(qintitle=term, language='en', sort_by='relevancy', page=1)
+        now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+        yesterday = (datetime.utcnow() - timedelta(hours = 24)).strftime('%Y-%m-%d %H:%M:%S')
+        all_articles = newsapi.get_everything(qintitle=term, language='en', from_param=yesterday, to=now, sort_by='relevancy', page=1)
         if all_articles['status'] == 'error':
             raise
         else:
@@ -139,7 +142,9 @@ def add_tag():
         result = False
 
     if result:
-        all_articles = newsapi.get_everything(qintitle=name, language='en', sort_by='relevancy', page=1)
+        now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+        yesterday = (datetime.utcnow() - timedelta(hours = 24)).strftime('%Y-%m-%d %H:%M:%S')
+        all_articles = newsapi.get_everything(qintitle=name, language='en', from_param=yesterday, to=now, sort_by='relevancy', page=1)
         if all_articles['status'] == 'error':
             return jsonify(result=False)
         else:
@@ -162,7 +167,9 @@ def tag_articles():
     """set display column to False for tag object associated with passed id"""
     tag_id = int(request.args["tag_id"])
     tag_name = Tag.query.get(tag_id).name
-    all_articles = newsapi.get_everything(qintitle=tag_name, language='en', sort_by='relevancy', page=1)
+    now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+    yesterday = (datetime.utcnow() - timedelta(hours = 24)).strftime('%Y-%m-%d %H:%M:%S')
+    all_articles = newsapi.get_everything(qintitle=tag_name, language='en', from_param=yesterday, to=now, sort_by='relevancy', page=1)
     if all_articles['status'] == 'error':
         return jsonify(result=False)
     else:
