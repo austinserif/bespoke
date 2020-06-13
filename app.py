@@ -6,7 +6,7 @@ from forms import UserSignUpForm, UserLoginForm, GetStartedForm, NewTagForm
 from models import connect_db, db, User, Tag, SearchItem
 from datetime import datetime, timedelta
 import json
-from news import newsapi
+from news import newsapi, get_articles
 
 app = Flask(__name__)
 app.config.from_object('config.Development')
@@ -108,9 +108,7 @@ def search():
     search_item = User.add_search(term, current_user.id)
     update_session()
     try:
-        now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-        yesterday = (datetime.utcnow() - timedelta(hours = 24)).strftime('%Y-%m-%d %H:%M:%S')
-        all_articles = newsapi.get_everything(qintitle=term, language='en', from_param=yesterday, to=now, sort_by='relevancy', page=1)
+        all_articles = get_articles(term)
         if all_articles['status'] == 'error':
             raise
         else:
@@ -142,9 +140,7 @@ def add_tag():
         result = False
 
     if result:
-        now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-        yesterday = (datetime.utcnow() - timedelta(hours = 24)).strftime('%Y-%m-%d %H:%M:%S')
-        all_articles = newsapi.get_everything(qintitle=name, language='en', from_param=yesterday, to=now, sort_by='relevancy', page=1)
+        all_articles = get_articles(name)
         if all_articles['status'] == 'error':
             return jsonify(result=False)
         else:
@@ -167,9 +163,7 @@ def tag_articles():
     """set display column to False for tag object associated with passed id"""
     tag_id = int(request.args["tag_id"])
     tag_name = Tag.query.get(tag_id).name
-    now = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-    yesterday = (datetime.utcnow() - timedelta(hours = 24)).strftime('%Y-%m-%d %H:%M:%S')
-    all_articles = newsapi.get_everything(qintitle=tag_name, language='en', from_param=yesterday, to=now, sort_by='relevancy', page=1)
+    all_articles = get_articles(tag_name)
     if all_articles['status'] == 'error':
         return jsonify(result=False)
     else:
