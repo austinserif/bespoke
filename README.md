@@ -1,5 +1,4 @@
 ## Bespoke Newsdesk
-### Capstone Project by Austin Serif
 
 https://bespokenews.us
 [NewsAPI](https://newsapi.org/)
